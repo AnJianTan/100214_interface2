@@ -1,11 +1,11 @@
 // Install required packages: express (Installed), body-parser (Installed)
 // Don't forget to actually install these!
-const express = require('express');
+const express = require('./my-package/node_modules/express');
 const path = require('path');
-const bodyParser = require('body-parser');
+const bodyParser = require('./my-package/node_modules/body-parser');
 
 const app = express();
-const PORT = 3000;
+const PORT = 3000; // Port definition
 
 // Middleware
 app.use(bodyParser.json());
@@ -14,18 +14,14 @@ app.use(express.static('public'));
 
 // In-memory status data for the spacecraft
 let spacecraftStatus = {
-    power: "OFF", // Default power state
-    speed: 0,     // Default speed
-    fuel: 100     // Default fuel level
+    power: null, // Default power state
+    speed: null,     // Default speed
+    fuel: null     // Default fuel level
 };
 
 // Routes
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-// To see if the code is working
-app.listen(port, () => {
-    console.log(`Server is running on http://localhost:${port}`);
 });
 
 // Get current status of the spacecraft
@@ -54,4 +50,3 @@ app.post('/update-status', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Spacecraft backend is running on http://localhost:${PORT}`);
 });
-
